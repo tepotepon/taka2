@@ -2,9 +2,8 @@
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include <opencv2/tracking.hpp>
 #include <opencv2/features2d.hpp>
-#include "ballpredictor.h"
+#include "trajectory.h"
 
 /*
 #include <pylon/PylonIncludes.h>

@@ -12,3 +12,12 @@ https://drive.google.com/file/d/1pycprE_4BUgKuSTetIU_u4QtHD_sFYdg/view?usp=shari
 7) ./taca 
 
 
+CPP = g++
+
+CPPFLAGS = -L/home/jtorres/libs/opencv/4.0.1/libs -I/home/jtorres/libs/opencv/4.0.1/include -Wl,-rpath=/home/jtorres/libs/opencv/4.0.1/libs
+
+all: test
+
+test: main.cpp
+	$(CPP) $(CPPFLAGS) $^ -o $@
+
