@@ -40,7 +40,7 @@ int main(){
 
   vector<Point> ballPositions;
   Point predictedballPosition;
-  VideoCapture cap("prueba.avi");
+  VideoCapture cap("/vids/prueba.avi");
 
   // Check if camera opened successfully
   if(!cap.isOpened()){
