@@ -1,3 +1,5 @@
 */vids/*
+!*/vids/.gitkeep
 */build/*
+!*/build/.gitkeep
 */*.app
