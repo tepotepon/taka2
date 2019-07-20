@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 2.8)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(EXECUTABLE_OUTPUT_PATH ../)
+project( taca )
+find_package( OpenCV REQUIRED )
+add_executable( taca.app main.cpp trajectory.cpp )
+target_link_libraries( taca.app ${OpenCV_LIBS} )
