@@ -27,7 +27,7 @@ def CalibSystem(my_drive):
     print("Index found.\n")
     
     my_drive.axis0.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
-       
+    
     while my_drive.axis0.current_state != AXIS_STATE_IDLE:
         time.sleep(0.1)
     

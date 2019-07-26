@@ -29,4 +29,11 @@ my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
 
 my_drive.axis0.motor.config.current_lim = 25 # Amperes de corriente limite
 
+print ("Homing...\n")
 Rango, Centro, MaxPos, MinPos = Homing(my_drive)
+
+cp = my_drive.axis0.encoder.pos_estimate
+
+print ("Rango: ", Rango, "Centro: ", Centro, "MaxPos: ", MaxPos, "MinPos ", MinPos, "\n")
+
+56, 4.5, 22.5, 34.5, 35.5
