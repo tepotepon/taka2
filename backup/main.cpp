@@ -5,13 +5,6 @@
 #include <opencv2/features2d.hpp>
 #include "trajectory.h"
 
-/*
-#include <pylon/PylonIncludes.h>
-#ifdef PYLON_WIN_BUILD
-#    include <pylon/PylonGUI.h>
-#endif
-*/
-
 #include <unistd.h>
 #include <time.h>
 #include <iostream>
@@ -29,7 +22,7 @@ Mat red_image, red_yellow_image;
 Mat element1 = getStructuringElement( 2,Size( 3, 3 ),Point( 1, 1 ));
 Mat element2 = getStructuringElement( 2,Size( 2*7 + 1, 2*7+1 ),Point( 5, 5 ));
 
-Rect roi(100, 10, 600, 580);
+//Rect roi(100, 10, 600, 580);
 time_t start, ending;
 
 int frames;
@@ -40,7 +33,7 @@ int main(){
 
   vector<Point> ballPositions;
   Point predictedballPosition;
-  VideoCapture cap("vids/test.avi");
+  VideoCapture cap("vids/Vid.mp4");
 
   // Check if camera opened successfully
   if(!cap.isOpened()){
@@ -57,10 +50,10 @@ int main(){
         break;
 
       //get rid of non-useful info.
-      Mat image_roi = frame(roi);
+      // Mat image_roi = frame(roi);
 
       //RGB to HSV
-      cvtColor(image_roi,src_hsv, COLOR_BGR2HSV);
+      //cvtColor(image,src_hsv, COLOR_BGR2HSV);
 
       // Combinación de colores para seguir jugadores + pelota.
       /*
@@ -71,7 +64,7 @@ int main(){
 
       //add together for a single binary image.
       addWeighted(red_threshold,1.0,red2_threshold,1.0, 0.0,red_image);
-      addWeighted(yellow_threshold,1.0,red_image,1.0, 0.0,red_yellow_image);*/
+      addWeighted(yellow_threshold,1.0,red_image,1.0, 0.0,red_yellow_image);
 
       inRange(src_hsv, Scalar(6, 150, 200), Scalar(15, 250, 255), red_yellow_image); //orange
 
@@ -104,32 +97,16 @@ int main(){
         drawMarker(image_roi,centers[0],Scalar( 0, 255, 0 ),0,20,3,8);
         drawMarker(image_roi,predictedballPosition,Scalar( 255, 0, 0 ),0,20,3,8);
 
-        // portero con limites
-        /*
-            if(int(predictedballPosition.y)-15 >400){
-                portero = Rect(500,400-15, 30,30);
-                rectangle(image_roi,portero, Scalar(0,0,255), FILLED,8,0);
-            }
-            else if(int(predictedballPosition.y)-15 < 180){
-                portero = Rect(500,180-15, 30,30);
-                rectangle(image_roi,portero, Scalar(0,0,255), FILLED,8,0);
-            }
-            else {
-                portero = Rect(500,int(predictedballPosition.y)-15, 30,30);
-                rectangle(image_roi,portero, Scalar(0,0,255), FILLED,8,0);
-            }
-        }*/
-
         portero = Rect(500,int(predictedballPosition.y)-15, 30,30);
         rectangle(image_roi,portero, Scalar(0,0,255), FILLED,8,0);
       }
 
       cout << "current position        = " << ballPositions.back().x << ", " << ballPositions.back().y << "\n";
       cout << "next predicted position = " << predictedballPosition.x << ", " << predictedballPosition.y << "\n";
-      cout << "--------------------------------------------------\n";
+      cout << "--------------------------------------------------\n";*/
 
       //show results.
-      imshow( "Detection results.", image_roi);
+      imshow( "Detection results.", frame);
       //imshow( "binary mask", red_yellow_image);
 
       // Press  ESC on keyboard to exit
