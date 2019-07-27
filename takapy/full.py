@@ -22,6 +22,8 @@ cy = 0
 # Create a GkPos object with an array size of 5
 gkPos = gkp.GkPos(5)
 
+f = open("data.txt","w+")
+
 # Camera stuff
 camera = pylon.InstantCamera(pylon.TlFactory.GetInstance().CreateFirstDevice())
 camera.Open()
@@ -110,17 +112,23 @@ while camera.IsGrabbing():
 	elif y_ref < MinPos:
 		y_ref = MinPos
 
+	# Log relevant vars
+	pos = A0.controller.pos_setpoint
+	I = A0.motor.current_control.Iq_measured
+	datos = str(I) + ", " + str(pos) + ", " + str(y) + ", " + str(y_ref) + str(cx) + ", " + str(cy) + ";\r\n"
+	f.write(datos)
+
 	# Send the motor to the required position
 	A0.controller.pos_setpoint = y_ref
 
-
 	cv2.imshow("results", img)
-	print(y_ref, "\t", cy, "\n")
+	print(datos)
 	k = cv2.waitKey(1)
 	if k == 27:
 		break
 
 camera.StopGrabbing()
 out.release()
+f.close()
 
 cv2.destroyAllWindows()
