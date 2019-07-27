@@ -111,11 +111,11 @@ while camera.IsGrabbing():
 		y_ref = MaxPos
 	elif y_ref < MinPos:
 		y_ref = MinPos
-
+	t_log = time.time_ns()
 	# Log relevant vars
 	pos = A0.controller.pos_setpoint
 	I = A0.motor.current_control.Iq_measured
-	datos = str(I) + ", " + str(pos) + ", " + str(y) + ", " + str(y_ref) + str(cx) + ", " + str(cy) + ";\r\n"
+	datos = str(t_log) + ", " + str(I) + ", " + str(pos) + ", " + str(y) + ", " + str(y_ref) + str(cx) + ", " + str(cy) + ";\r\n"
 	f.write(datos)
 
 	# Send the motor to the required position
