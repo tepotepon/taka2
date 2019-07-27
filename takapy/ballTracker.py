@@ -23,17 +23,20 @@ kernel2 = np.ones((5,5),np.uint8)
 actual_center = (0,0)
 last_center = (0,0)
 
+
 while camera.IsGrabbing():
 	grabResult = camera.RetrieveResult(5000, pylon.TimeoutHandling_ThrowException)
 
 	if grabResult.GrabSucceeded():
 		image = converter.Convert(grabResult)
-		img = image.GetArray()
+		img1 = image.GetArray()
+		img = img1[60:540,170:680]
 		hsv_frame = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 		orange_mask = cv2.inRange(hsv_frame, low_red, high_red)
 		orange = cv2.bitwise_and(img, img, mask=orange_mask)
 
-	
+		#cv2.imshow("orange_mask", orange_mask)
+	print(int(img.get(3)),int(img.get(4)))
 	erosion = cv2.erode(orange_mask,kernel1,iterations = 1)
 	dilation = cv2.dilate(erosion,kernel2,iterations = 2)
 	last = cv2.bitwise_and(img, img, mask=dilation)
@@ -46,15 +49,21 @@ while camera.IsGrabbing():
 		cx = int(M['m10']/M['m00'])
 		cy = int(M['m01']/M['m00'])
 		actual_center = (cx,cy)
-		print(center)
-	else: last_center = actual_center
+		#print(actual_center)
 
-	cv2.imshow("orange_mask", img)
+	out.write(img)
+	cv2.imshow("img", img)
+
+
+
+
+	#cv2.imshow("orange_mask", orange_mask)
 	k = cv2.waitKey(1)
 	if k == 27:
 		break
 
 # Releasing the resource    
 camera.StopGrabbing()
+out.release()
 
 cv2.destroyAllWindows()
