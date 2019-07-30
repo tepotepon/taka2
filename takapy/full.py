@@ -22,7 +22,7 @@ cy = 0
 # Create a GkPos object with an array size of 5
 gkPos = gkp.GkPos(5)
 
-f = open("data.txt","w+")
+f = open("output/data.txt","w+")
 
 # Camera stuff
 camera = pylon.InstantCamera(pylon.TlFactory.GetInstance().CreateFirstDevice())
@@ -37,7 +37,7 @@ converter.OutputPixelFormat = pylon.PixelType_BGR8packed
 converter.OutputBitAlignment = pylon.OutputBitAlignment_MsbAligned
 
 #Define codec to save video
-out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 27, (510,480))
+out = cv2.VideoWriter('output/outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 27, (510,480))
 
 # Orange color thresholds 
 low_red = np.array([6, 150, 200])	
@@ -111,11 +111,11 @@ while camera.IsGrabbing():
 		y_ref = MaxPos
 	elif y_ref < MinPos:
 		y_ref = MinPos
-	t_log = time.time_ns()
+	t_log = time.time()
 	# Log relevant vars
 	pos = A0.controller.pos_setpoint
 	I = A0.motor.current_control.Iq_measured
-	datos = str(t_log) + ", " + str(I) + ", " + str(pos) + ", " + str(y) + ", " + str(y_ref) + str(cx) + ", " + str(cy) + ";\r\n"
+	datos = str(t_log) + ", " + str(I) + ", " + str(pos) + ", " + str(y) + ", " + str(y_ref) + ", " + str(cx) + ", " + str(cy) + ";\r\n"
 	f.write(datos)
 
 	# Send the motor to the required position
