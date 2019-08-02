@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-from cv2 import aruco
 from pypylon import pylon
 
 # conecting to the first available camera
@@ -15,28 +14,32 @@ converter = pylon.ImageFormatConverter()
 converter.OutputPixelFormat = pylon.PixelType_BGR8packed
 converter.OutputBitAlignment = pylon.OutputBitAlignment_MsbAligned
 
+grabResult = camera.RetrieveResult(5000, pylon.TimeoutHandling_ThrowException)
 
-aruco_dict = aruco.Dictionary_get(aruco.DICT_ARUCO_ORIGINAL)
-parameters = aruco.DetectorParameters_create()
+image = converter.Convert(grabResult)
+img1 = image.GetArray()
+counter = 0
+
+out = cv2.VideoWriter('out.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 27, (800,600))
+
 
 while camera.IsGrabbing():
 	grabResult = camera.RetrieveResult(5000, pylon.TimeoutHandling_ThrowException)
 
 	if grabResult.GrabSucceeded():
-		# Access the image data
 		image = converter.Convert(grabResult)
-		img = image.GetArray()
-		blur = cv2.GaussianBlur(img,(7,7),0)
-		gray = cv2.cvtColor(blur, cv2.COLOR_BGR2GRAY)
-		corners, ids, rejectedImgPoints = aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-		frame = aruco.drawDetectedMarkers(img, corners, ids)
-		cv2.imshow('Aruco', frame)
-		k = cv2.waitKey(1)
-		if k == 27:
-			break
-		grabResult.Release()
-    
-# Releasing the resource    
-camera.StopGrabbing()
+		img1 = image.GetArray()
+		out.write(img1)
+	
+	cv2.imshow("img", img1)
+	k = cv2.waitKey(1)
+	if k == 27:
+		break
+	elif k == 32:
+		counter = counter + 1
+		print("photo_" + str(counter) + ".jpg")
+		cv2.imwrite("photo_" + str(counter) + ".jpg", img1)
 
+camera.StopGrabbing()
+out.release()
 cv2.destroyAllWindows()
