@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import sys
 
 cap = cv2.VideoCapture("data/test.avi")
 
@@ -19,33 +20,33 @@ frames = 0
 pause = False # For debugging, useless otherwise.
 speed = 1
 
-# Lost the target as soon as it approached the puppet.
-# Maybe because the number of frames is pretty low and
-# the ball quite fast. Test it with the camera online.
-#tracker = cv2.TrackerCSRT_create()
-
-# Didn't even resisted one frame.
-#tracker = cv2.TrackerKCF_create()
-
-# Lost the target as soon as it approached the puppet.
-# Maybe because the number of frames is pretty low and
-# the ball quite fast. Test it with the camera online.
-#tracker = cv2.TrackerBoosting_create()
-
-# Super slow, lost the target too. Again, might be
-# because of the low number of frames.
-#tracker = cv2.TrackerMIL_create()
-
-# Lots of false positives, pretty slow too.
-#tracker = cv2.TrackerTLD_create()
-
-# Lost the target as soon as it approached the puppet.
-# Maybe because the number of frames is pretty low and
-# the ball quite fast. Test it with the camera online.
-#tracker = cv2.TrackerMedianFlow_create()
-
-# Didn't even resisted one frame.
-tracker = cv2.TrackerMOSSE_create()
+if(len(sys.argv)==2):
+	if (int(sys.argv[1]) == 0):
+		tracker = cv2.TrackerCSRT_create()
+		print("CSRT\r\n")
+	elif (int(sys.argv[1]) == 1):
+		tracker = cv2.TrackerKCF_create()
+		print("KCF\r\n")
+	elif (int(sys.argv[1]) == 2):
+		tracker = cv2.TrackerBoosting_create()
+		print("Boosting\r\n")
+	elif (int(sys.argv[1]) == 3):
+		tracker = cv2.TrackerMIL_create()
+		print("MIL\r\n")
+	elif (int(sys.argv[1]) == 4):
+		tracker = cv2.TrackerTLD_create()
+		print("TLD\r\n")
+	elif (int(sys.argv[1]) == 5):
+		tracker = cv2.TrackerMedianFlow_create()
+		print("Median Flow\r\n")
+	elif (int(sys.argv[1]) == 6):
+		tracker = cv2.TrackerMOSSE_create()
+		print("MOSSE\r\n")
+	else:
+		print("Wrong parameter value. Try numbers from 0-6")
+else:
+	print("Wrong number of arguments.\r\n")
+	exit()
 
 while (cap.isOpened()):
 	ret, frame = cap.read()
