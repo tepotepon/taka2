@@ -7,7 +7,7 @@ load('training_data.mat');
 
 genOpt = genfisOptions('SubtractiveClustering'); % Keep an eye on this.
 inFIS = genfis(IN,OUT,genOpt);
-opt = anfisOptions('InitialFIS',inFIS);
+opt = anfisOptions('InitialFIS',inFIS,'EpochNumber',40);
 
 %% Train the system
 
@@ -18,4 +18,5 @@ writeFIS(fis,'tacafis');
 
 load('validation_data.mat');
 test = evalfis(fis,IN);
+
 plot(test), hold on, plot(OUT);
