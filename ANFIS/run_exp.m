@@ -1,4 +1,4 @@
-function DS = run_exp(f,Q,w,l)
+function DS = run_exp(f,Q,w,l,nv)
     
     % Ball Parameters
     ball_r = 15; % 3[cm], ball diameter.
@@ -20,13 +20,15 @@ function DS = run_exp(f,Q,w,l)
         if(p(1)+ball_r <= l)
             X = [X p];
             V = [V v];
-        else
-            % Compute the real contact point, ignoring sampling issues.
+        else % Compute the real contact point, ignoring sampling effects.
             dt_r = (l-ball_r-X(1,end))/V(1,end);
             out = X(:,end) + dt_r*V(:,end);
             break;
         end
     end
+    
+    % Add noise to the trajectory.
+    X = X + nv*randn(size(X));
     
     % Parse the position data into the dataset format for ANFIS.
     if(length(X) >= Q)

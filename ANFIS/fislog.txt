@@ -1,0 +1,174 @@
+Session1:
+
+initFIS1 generated from subClust. Reported:
+
+Computing potential for each data point...
+Found cluster 1, potential = 1
+Found cluster 2, potential = 0.958203
+Found cluster 3, potential = 0.915123
+Found cluster 4, potential = 0.878458
+Found cluster 5, potential = 0.828965
+Found cluster 6, potential = 0.752352
+Found cluster 7, potential = 0.723967
+Found cluster 8, potential = 0.718945
+Found cluster 9, potential = 0.698039
+Found cluster 10, potential = 0.654548
+Found cluster 11, potential = 0.630738
+Found cluster 12, potential = 0.599463
+Found cluster 13, potential = 0.592418
+Found cluster 14, potential = 0.591678
+Found cluster 15, potential = 0.579609
+Found cluster 16, potential = 0.5447
+Found cluster 17, potential = 0.542471
+Found cluster 18, potential = 0.528891
+Found cluster 19, potential = 0.516211
+Found cluster 20, potential = 0.502079
+Found cluster 21, potential = 0.499935
+Found cluster 22, potential = 0.401777
+Found cluster 23, potential = 0.383737
+Found cluster 24, potential = 0.316716
+Found cluster 25, potential = 0.316469
+Found cluster 26, potential = 0.312159
+Found cluster 27, potential = 0.303038
+Found cluster 28, potential = 0.281415
+Found cluster 29, potential = 0.279133
+Found cluster 30, potential = 0.276731
+Found cluster 31, potential = 0.252807
+Found cluster 32, potential = 0.251865
+Found cluster 33, potential = 0.247025
+Found cluster 34, potential = 0.233582
+Found cluster 35, potential = 0.232936
+Found cluster 36, potential = 0.215996
+Found cluster 37, potential = 0.21596
+Found cluster 38, potential = 0.213663
+Found cluster 39, potential = 0.208385
+Found cluster 40, potential = 0.204682
+Found cluster 41, potential = 0.182011
+Found cluster 42, potential = 0.174725
+Found cluster 43, potential = 0.17403
+Found cluster 44, potential = 0.170754
+Found cluster 45, potential = 0.166679
+Found cluster 46, potential = 0.162497
+Found cluster 47, potential = 0.159539
+
+ANFIS info:
+	Number of nodes: 1427
+	Number of linear parameters: 705
+	Number of nonlinear parameters: 1316
+	Total number of parameters: 2021
+	Number of training data pairs: 122754
+	Number of checking data pairs: 13474
+	Number of fuzzy rules: 47
+
+Session reported:
+
+   1 	 0.313491 	 0.317987
+   2 	 0.312551 	 0.317056
+   3 	 0.311675 	 0.316158
+   4 	 0.310853 	 0.315304
+   5 	 0.31007 	 0.314492
+Step size increases to 0.011000 after epoch 5.
+   6 	 0.309317 	 0.313721
+   7 	 0.308512 	 0.312915
+   8 	 0.307725 	 0.312147
+   9 	 0.306945 	 0.311405
+Step size increases to 0.012100 after epoch 9.
+  10 	 0.306164 	 0.310679
+
+Designated epoch number reached --> ANFIS training completed at epoch 10.
+
+Minimal training RMSE = 0.306164
+Minimal checking RMSE = 0.310679
+
+Step profile is not as desired. Error keeps going down so lets keep it up.
+Saved to tacafis1.fis. Error profiles indicate that no overfitting is present.
+
+Session2:
+
+initFIS2 is tacafis1. Increased step rate to 1.4. Initial step changed to 0.0121
+
+1 	 0.306164 	 0.310679
+2 	 0.305297 	 0.309888
+3 	 0.304419 	 0.309095
+4 	 0.303531 	 0.308294
+5 	 0.302636 	 0.307486
+Step size increases to 0.016940 after epoch 5.
+6 	 0.301734 	 0.30667
+7 	 0.300462 	 0.305513
+8 	 0.299175 	 0.304339
+9 	 0.297866 	 0.303152
+Step size increases to 0.023716 after epoch 9.
+10 	 0.296533 	 0.301991
+
+Designated epoch number reached --> ANFIS training completed at epoch 10.
+
+Minimal training RMSE = 0.296533
+Minimal checking RMSE = 0.301991
+
+Session3:
+
+initFIS3 is tacafis2. Step increase rate remains 1.4. Initial step changed to 0.023716.
+Epoch number set to 20.
+
+1 	 0.296533 	 0.301991
+2 	 0.294678 	 0.300597
+3 	 0.292903 	 0.299437
+4 	 0.291199 	 0.298227
+5 	 0.289551 	 0.297007
+Step size increases to 0.0332024 after epoch 5.
+6 	 0.287959 	 0.295787
+7 	 0.285831 	 0.294190
+8 	 0.283836 	 0.292537
+9 	 0.282069 	 0.291098
+Step size increases to 0.04648336 after epoch 9.
+10 	 0.281077 	 0.289479
+11 	 0.280299 	 0.288957
+12 	 0.278586 	 0.287469
+13 	 0.277480 	 0.285677
+Step size increases to 0.065076704 after epoch 13.
+14 	 0.276146 	 0.285128
+15 	 0.275172 	 0.282893
+16 	 0.272735 	 0.282079
+17 	 0.271241 	 0.280007
+Step size increases to 0.0911073856 after epoch 13.
+18 	 0.269345 	 0.279282
+19 	 0.268442 	 0.276764
+20 	 0.265887 	 0.276665
+
+Session4:
+
+initFIS4 is tacafis3. Step increase rate remains 1.4. Initial step changed to 0.0911073856.
+Epoch number set to 20.
+
+Start training ANFIS ...
+
+   1 	 0.265887 	 0.276665
+   2 	 0.265108 	 0.275351
+   3 	 0.263068 	 0.274203
+   4 	 0.262543 	 0.272776
+   5 	 0.260888 	 0.272864
+Step size increases to 0.127550 after epoch 5.
+   6 	 0.259732 	 0.271555
+   7 	 0.258088 	 0.27098
+   8 	 0.257232 	 0.268118
+   9 	 0.256544 	 0.268933
+Step size increases to 0.178570 after epoch 9.
+  10 	 0.255211 	 0.265533
+  11 	 0.254756 	 0.267339
+  12 	 0.255025 	 0.265389
+  13 	 0.254009 	 0.268672
+  14 	 0.25273 	 0.264671
+  15 	 0.250864 	 0.266395
+  16 	 0.250308 	 0.263351
+Step size increases to 0.249999 after epoch 16.
+  17 	 0.249841 	 0.265264
+  18 	 0.253827 	 0.266281
+  19 	 0.248999 	 0.262643
+  20 	 0.249604 	 0.261721
+
+Designated epoch number reached --> ANFIS training completed at epoch 20.
+
+Minimal training RMSE = 0.248999
+Minimal checking RMSE = 0.261721
+
+Time for a change in the approach...
