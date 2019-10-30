@@ -1,4 +1,4 @@
-function DS = run_exp(f,Q,w,l,nv)
+function DS = run_exp(f,Q,w,l,nv,rp)
     
     % Ball Parameters
     ball_r = 15; % 3[cm], ball diameter.
@@ -28,8 +28,16 @@ function DS = run_exp(f,Q,w,l,nv)
     end
     
     % Add noise to the trajectory.
-    X = X + nv*randn(size(X));
+    %subplot(2,1,1)
+    %plot(X(1,:),X(2,:)),hold on
+    var = min(nv, rp*(max(X(2,:))-min(X(2,:))));
+    noise_y = var*randn(1,size(X,2));
+    noise_x = 1*randn(1,size(X,2)); %zeros(1,size(X,2))
+    X = X + [noise_x; noise_y];
     
+    %plot(X(1,:),X(2,:)),hold off;
+    %ylim([-285,285]);xlim([0,345]);
+    %subplot(2,1,2),plot(noise_y)
     % Parse the position data into the dataset format for ANFIS.
     if(length(X) >= Q)
         DS = zeros([length(X)-Q,2*Q+1]);

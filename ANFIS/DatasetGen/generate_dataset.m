@@ -1,6 +1,6 @@
 % generate_dataset(7,4500,500,5) to generate a dataset following Richard's
 % Memoir. I'm assuming a resolution of about 1[mm/pix].
-function generate_dataset(Q, N_train, N_validate, noise_variance)
+function generate_dataset(Q, N_train, N_validate, noise_variance,rp)
     %% Set Parameters
 
     % System params.
@@ -19,7 +19,7 @@ function generate_dataset(Q, N_train, N_validate, noise_variance)
         % samples are available for the shot.
         new_DS = [];
         while(isempty(new_DS))
-            new_DS = run_exp(fs,Q,width,len,noise_variance);
+            new_DS = run_exp(fs,Q,width,len,noise_variance,rp);
         end
         DS1 = [DS1; new_DS];
     end
@@ -30,7 +30,7 @@ function generate_dataset(Q, N_train, N_validate, noise_variance)
         % samples are available for the shot.
         new_DS = [];
         while(isempty(new_DS))
-            new_DS = run_exp(fs,Q,width,len,noise_variance);
+            new_DS = run_exp(fs,Q,width,len,noise_variance,rp);
         end
         DS2 = [DS2; new_DS];
     end
@@ -58,10 +58,9 @@ function generate_dataset(Q, N_train, N_validate, noise_variance)
     DS2(:,Q+1:end) = DS2(:,Q+1:end)./sat_y;
     
     %% Separate Data
-    
     IN_Train = DS1(:,1:end-1);
     OUT_Train = DS1(:,end);
     IN_Validate = DS2(:,1:end-1);
     OUT_Validate = DS2(:,end);
-    save('DataSet','IN_Train','OUT_Train','IN_Validate','OUT_Validate');
+    save('DataSet3','IN_Train','OUT_Train','IN_Validate','OUT_Validate');
 end
