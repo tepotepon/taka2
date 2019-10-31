@@ -31,8 +31,8 @@ function DS = run_exp(f,Q,w,l,nv,rp)
     %subplot(2,1,1)
     %plot(X(1,:),X(2,:)),hold on
     var = min(nv, rp*(max(X(2,:))-min(X(2,:))));
-    noise_y = var*randn(1,size(X,2));
-    noise_x = 1*randn(1,size(X,2)); %zeros(1,size(X,2))
+    noise_y = wgn(1,size(X,2),var);
+    noise_x = wgn(1,size(X,2),1); %zeros(1,size(X,2))
     X = X + [noise_x; noise_y];
     
     %plot(X(1,:),X(2,:)),hold off;
