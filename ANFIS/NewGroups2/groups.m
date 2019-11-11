@@ -1,0 +1,13 @@
+train_tacafis('DataSet3', 20, 0.025, 0.9, 1.1, 101);
+train_tacafis('DataSet3', 30, 0.025, 0.9, 1.1, 201);
+train_tacafis('DataSet3', 40, 0.025, 0.9, 1.1, 301);
+train_tacafis('DataSet3', 40, 0.025, 0.8, 1.1, 304);
+train_tacafis('DataSet3', 40, 0.025, 0.7, 1.1, 307);
+train_tacafis('DataSet3', 40, 0.05, 0.9, 1.1, 311);
+train_tacafis('DataSet3', 40, 0.05, 0.8, 1.1, 314);
+train_tacafis('DataSet3', 40, 0.05, 0.8, 1.3, 315);
+train_tacafis('DataSet3', 40, 0.05, 0.7, 1.1, 317);
+train_tacafis('DataSet3', 40, 0.1, 0.8, 1.1, 334);
+train_tacafis('DataSet3', 40, 0.1, 0.8, 1.5, 336);
+train_tacafis('DataSet3', 50, 0.075, 0.9, 1.3, 422);
+train_tacafis('DataSet3', 50, 0.1, 0.9, 1.1, 431);
