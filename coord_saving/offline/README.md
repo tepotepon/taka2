@@ -20,7 +20,7 @@
 
 ![untitled](https://user-images.githubusercontent.com/32227452/85506883-3b825680-b5bf-11ea-8fe1-72ab7d444f7d.png)
 
-> **note2:** the example video used here does not fulfill this requisite, thus tracking of ALL objects (AKA: `save_coords.py`) doesnt work as intended.
+> **note2:** the example video used here does not fulfill this prerequisite thus tracking of ALL objects (AKA: `save_coords.py`) doesn't work as intended.
 
 - call using terminal: 
 ```shell
