@@ -84,7 +84,7 @@ def nothing(x):
     pass
 
 cy = 0
-
+save_flag = False
 # Create a GkPos object with an array size of 5
 gkPos = gkp.GkPos(5)
 
@@ -206,7 +206,7 @@ while camera.IsGrabbing():
 		cv2.putText(warped_rgb, text, (centroid[0] - 10, centroid[1] - 10),
 			cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 		cv2.circle(warped_rgb, (centroid[0], centroid[1]), 5, (0, 255, 0), -1)
-		if (save_flag == True) and (pause == False):
+		if (save_flag == True):
 			datos = str(frame) + ", " + text + ", " + str(centroid[0]) + ", " + str(centroid[1]) + ";\r\n"
 			fteam1.write(datos)
 	
@@ -219,7 +219,7 @@ while camera.IsGrabbing():
 		cv2.putText(warped_rgb, text, (centroid[0] - 10, centroid[1] - 10),
 			cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3)
 		cv2.circle(warped_rgb, (centroid[0], centroid[1]), 5, (0, 255, 0), -1)
-		if (save_flag == True) and (pause == False):
+		if (save_flag == True):
 			datos = str(frame) + ", " + text + ", " + str(centroid[0]) + ", " + str(centroid[1]) + ";\r\n"
 			fb.write(datos)
 
@@ -230,7 +230,7 @@ while camera.IsGrabbing():
 		cv2.putText(warped_rgb, text, (centroid[0] - 10, centroid[1] - 10),
 			cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
 		cv2.circle(warped_rgb, (centroid[0], centroid[1]), 5, (0, 255, 0), -1)
-		if (save_flag == True) and (pause == False):
+		if (save_flag == True):
 			datos = str(frame) + ", " + text + ", " + str(centroid[0]) + ", " + str(centroid[1]) + ";\r\n"
 			fteam2.write(datos)
 
@@ -242,6 +242,8 @@ while camera.IsGrabbing():
 	k = cv2.waitKey(1)
 	if k == 27:
 		break
+	elif k == 32:
+		save_flag = not save_flag
 
 camera.StopGrabbing()
 out.release()
