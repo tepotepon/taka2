@@ -5,9 +5,9 @@
 - [save_ball_coords & save_coords](#save_ball_coords)
 - [offline_tunning](#offline_tunning)
 
---
+---
 
-##save_ball_coords
+## save_ball_coords
 > this scripts allow you to save the coordenates of the ball and players. The difference between `save_ball_coords.py` and `save_coords.py` is that `save_ball_coords.py` saves just the coordenates of the ball while `save_coords.py` saves the coordinates of all objects in the image. 
 
 ### Setup: 
@@ -42,10 +42,11 @@ $ python save_ball_coords.py example.mp4
 - example:
 
 ![image](https://user-images.githubusercontent.com/32227452/85506362-383a9b00-b5be-11ea-83e4-9a7ee72cb920.png)
-	- the columns denote: frame - object.ID - x_coord - y_coord. 
+
+- the columns denote: frame - object.ID - x_coord - y_coord. 
 > **Note:** x_coords and y_coords are relative to a 1800x800 image/matrix, where (0,0) is the top-left corner. 
 
---
+---
 
 ## Offline_tunning: 
 
