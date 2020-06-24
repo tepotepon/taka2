@@ -7,9 +7,10 @@
 
 ---
 
-## save_ball_coords
-> this scripts allow you to save the coordenates of the ball and players. 
-The difference between `save_ball_coords.py` and `save_coords.py` is that `save_ball_coords.py` saves just the coordenates of the ball while `save_coords.py` saves the coordinates of all objects in the image. 
+## save_ball_coords & save_coords
+> this scripts allow you to save the coordenates of ball and players into `.txt` files.
+
+>The difference between `save_ball_coords.py` and `save_coords.py` is that `save_ball_coords.py` only saves the coordenates of the ball while `save_coords.py` saves the coordinates of all objects in the image. 
 
 ### Setup: 
 
