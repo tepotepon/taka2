@@ -37,4 +37,3 @@ $ python save_ball_coords.py example.mp4
 ## Offline_tunning: 
 
 - this script serves as a test for tunning the color thresholds parameters. 
-
