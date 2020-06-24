@@ -4,7 +4,7 @@
 
 - Place video to be processed in this folder. (Download this <a href="https://drive.google.com/file/d/1Rr45scmC6dsU8pffWDMVBm23K8V49MeR/view?usp=sharing" target="_blank">**example**</a>)
 
-> note: it is **very important** that the foos-table looks something like this (colorwise): ![untitled](https://user-images.githubusercontent.com/32227452/85506883-3b825680-b5bf-11ea-8fe1-72ab7d444f7d.png)
+> **note:** it is **very important** that the foos-table looks something like this (colorwise: green-field/orange-ball/pink-team1/light_blue-team2): ![untitled](https://user-images.githubusercontent.com/32227452/85506883-3b825680-b5bf-11ea-8fe1-72ab7d444f7d.png)
 
 - call using terminal: 
 ```shell
@@ -28,10 +28,11 @@ $ python save_ball_coords.py example.mp4
 ### Output: 
 
 - The `Data.txt` file is inside *coords_data* folder
-- example: 
+- example:
+
 ![image](https://user-images.githubusercontent.com/32227452/85506362-383a9b00-b5be-11ea-83e4-9a7ee72cb920.png)
-- the columns denote: frame - object.ID - x_coord - y_coord. 
-> note: x_coords and y_coords are relative to a 1800x800 image/matrix, where (0,0) is the top-left corner. 
+	- the columns denote: frame - object.ID - x_coord - y_coord. 
+> **Note:** x_coords and y_coords are relative to a 1800x800 image/matrix, where (0,0) is the top-left corner. 
 
 ## Offline_tunning: 
 
