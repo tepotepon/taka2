@@ -1,5 +1,5 @@
 import sys
-from CentroidTracker import CentroidTracker
+from lib_cs.CentroidTracker import CentroidTracker
 import cv2
 import numpy as np
 import time
@@ -68,28 +68,30 @@ def four_point_transform(image, pts):
 def nothing(x):
     pass
 
-ct = CentroidTracker()
+ball_ct = CentroidTracker()
+team1_ct = CentroidTracker()
+team2_ct = CentroidTracker()
 cap = cv2.VideoCapture(sys.argv[1])
-f = open("data/ball_tracking.txt","w+")
+fb = open("coords_data/ball_tracking.txt","w+")
+fteam1 = open("coords_data/team1_tracking.txt","w+")
+fteam2 = open("coords_data/team2_tracking.txt","w+")
 save_flag = False
 pause = False
 frame = 0
 
 # Orange color thresholds 
-low_red = np.array([6, 110, 200])	
-high_red = np.array([15, 250, 255])	
+lower_ball = np.array([6, 110, 200])	
+upper_ball = np.array([15, 250, 255])
 
-cv2.namedWindow('ball_detection',cv2.WINDOW_NORMAL)
+# team1 color thresholds 
+lower_team1 = np.array([20, 52, 149])	
+upper_team1 = np.array([30, 255, 255])	
 
-# create trackbars for color change
-cv2.createTrackbar('low H','ball_detection',6,255,nothing)
-cv2.createTrackbar('high H','ball_detection',15,255,nothing)
-cv2.createTrackbar('low S','ball_detection',110,255,nothing)
-cv2.createTrackbar('high S','ball_detection',250,255,nothing)
-cv2.createTrackbar('low V','ball_detection',200,255,nothing)
-cv2.createTrackbar('high V','ball_detection',255,255,nothing)
-switch = '0 : OFF \n1 : ON'
-cv2.createTrackbar(switch, 'ball_detection',0,1,nothing)
+# Orange color thresholds 
+lower_team2 = np.array([0, 0, 0])	
+upper_team2 = np.array([10, 250, 255])	
+
+cv2.namedWindow('object_detection',cv2.WINDOW_NORMAL)
 
 while cap.isOpened():
 
@@ -100,17 +102,6 @@ while cap.isOpened():
 		img1 = last_image
 
 	hsv_frame = cv2.cvtColor(img1, cv2.COLOR_BGR2HSV)
-	# get current positions of four trackbars
-	h1 = cv2.getTrackbarPos('low H','ball_detection')
-	h2 = cv2.getTrackbarPos('high H','ball_detection')
-	s1 = cv2.getTrackbarPos('low S','ball_detection')
-	s2 = cv2.getTrackbarPos('high S','ball_detection')
-	v1 = cv2.getTrackbarPos('low V','ball_detection')
-	v2 = cv2.getTrackbarPos('high V','ball_detection')
-	s = cv2.getTrackbarPos(switch,'ball_detection')
-
-	lower = np.array([h1, s1, v1])
-	upper = np.array([h2, s2, v2])
 	
 	green = cv2.inRange(hsv_frame, (47, 52, 72), (68, 255,255))
 	green1 = cv2.morphologyEx(green, cv2.MORPH_CLOSE, np.ones((11,11),np.uint8))
@@ -124,26 +115,61 @@ while cap.isOpened():
 		warped_rgb = cv2.resize(warped_rgb, (1600,800))
 		warped_hsv = cv2.cvtColor(warped_rgb, cv2.COLOR_BGR2HSV)
 
-	orange_mask = cv2.inRange(warped_hsv, lower, upper)
-	erosion = cv2.erode(orange_mask,np.ones((5,5),np.uint8),iterations = 2)
-	dilation = cv2.dilate(erosion,np.ones((7,7),np.uint8),iterations = 2)
-	contours , _ = cv2.findContours(dilation,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+	for i in range(3):
+		if (i==0):
+			mask = cv2.inRange(warped_hsv, lower_ball, upper_ball)
+		if (i==1):
+			mask = cv2.inRange(warped_hsv, lower_team1, upper_team1)
+		if (i==2):
+			mask = cv2.inRange(warped_hsv, lower_team2, upper_team2)
 
-	objects = ct.update(contours)
-	# loop over the tracked objects
-	for (objectID, centroid) in objects.items():
+		mask = cv2.erode(mask,np.ones((5,5),np.uint8),iterations = 2)
+		mask = cv2.dilate(mask,np.ones((7,7),np.uint8),iterations = 2)
+		cont , _ = cv2.findContours(mask,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
+		if (i==0):
+			ball_objects = ball_ct.update(cont)
+		if (i==1):
+			team1_objects = team1_ct.update(cont)
+		if (i==2):
+			team2_objects = team2_ct.update(cont)
+
+	for (objectID, centroid) in team1_objects.items():
 		# draw both the ID of the object and the centroid of the
 		# object on the output frame
 		text = "ID {}".format(objectID)
+		cv2.putText(warped_rgb, text, (centroid[0] - 10, centroid[1] - 10),
+			cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+		cv2.circle(warped_rgb, (centroid[0], centroid[1]), 5, (0, 255, 0), -1)
+		if (save_flag == True) and (pause == False):
+			datos = str(frame) + ", " + text + ", " + str(centroid[0]) + ", " + str(centroid[1]) + ";\r\n"
+			fteam1.write(datos)
+	
+	
+	for (objectID, centroid) in ball_objects.items():
+		# draw both the ID of the object and the centroid of the
+		# object on the output frame
+		text = "ID {}".format(objectID)
+		#print((objectID, centroid))
 		cv2.putText(warped_rgb, text, (centroid[0] - 10, centroid[1] - 10),
 			cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3)
 		cv2.circle(warped_rgb, (centroid[0], centroid[1]), 5, (0, 255, 0), -1)
 		if (save_flag == True) and (pause == False):
 			datos = str(frame) + ", " + text + ", " + str(centroid[0]) + ", " + str(centroid[1]) + ";\r\n"
-			f.write(datos)
+			fb.write(datos)
 
-	if s == 0: cv2.imshow("ball_detection", warped_rgb)
-	else: cv2.imshow("ball_detection", dilation)
+	for (objectID, centroid) in team2_objects.items():
+		# draw both the ID of the object and the centroid of the
+		# object on the output frame
+		text = "ID {}".format(objectID)
+		cv2.putText(warped_rgb, text, (centroid[0] - 10, centroid[1] - 10),
+			cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
+		cv2.circle(warped_rgb, (centroid[0], centroid[1]), 5, (0, 255, 0), -1)
+		if (save_flag == True) and (pause == False):
+			datos = str(frame) + ", " + text + ", " + str(centroid[0]) + ", " + str(centroid[1]) + ";\r\n"
+			fteam2.write(datos)
+
+	cv2.imshow("object_detection", warped_rgb)
 
 	k = cv2.waitKey(1)
 	if k == 27:
@@ -156,6 +182,8 @@ while cap.isOpened():
 
 # Releasing the resource    
 cap.release()
-f.close()
+fb.close()
+fteam1.close()
+fteam2.close()
 
 cv2.destroyAllWindows()

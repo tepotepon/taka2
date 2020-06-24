@@ -8,13 +8,16 @@
 ---
 
 ## save_ball_coords
-> this scripts allow you to save the coordenates of the ball and players. The difference between `save_ball_coords.py` and `save_coords.py` is that `save_ball_coords.py` saves just the coordenates of the ball while `save_coords.py` saves the coordinates of all objects in the image. 
+> this scripts allow you to save the coordenates of the ball and players. 
+The difference between `save_ball_coords.py` and `save_coords.py` is that `save_ball_coords.py` saves just the coordenates of the ball while `save_coords.py` saves the coordinates of all objects in the image. 
 
 ### Setup: 
 
 - Place video to be processed in this folder. (Download this <a href="https://drive.google.com/file/d/1Rr45scmC6dsU8pffWDMVBm23K8V49MeR/view?usp=sharing" target="_blank">**example**</a>)
 
-> **note:** it is **kind of important** that the foos-table looks something like this (colorwise: green-field(mandatory)/orange-ball/pink-team1/light_blue-team2): ![untitled](https://user-images.githubusercontent.com/32227452/85506883-3b825680-b5bf-11ea-8fe1-72ab7d444f7d.png)
+> **note:** it is **VERY important** that the foos-table looks something like this (colorwise: green-field(mandatory)/orange-ball/pink-team1/light_blue-team2): ![untitled](https://user-images.githubusercontent.com/32227452/85506883-3b825680-b5bf-11ea-8fe1-72ab7d444f7d.png)
+
+> **note2:** the example video used here does not fulfill this requisite, thus tracking of ALL objects (AKA: `save_coords.py`) doesnt work as intended.
 
 - call using terminal: 
 ```shell
@@ -49,5 +52,22 @@ $ python save_ball_coords.py example.mp4
 ---
 
 ## Offline_tunning: 
+> this script serves as a test for tunning the color thresholds parameters.
 
-- this script serves as a test for tunning the color thresholds parameters.
+- call using terminal: 
+```shell
+$ python Offline_tunning.py example.mp4
+```
+- It will show you 3 windows, like this:
+![image](https://user-images.githubusercontent.com/32227452/85522263-6676a580-b5d3-11ea-83ae-e974821d5d66.png)}
+
+>**note**: In the example, the detection is not as good as it could be because of poor choice of colors. 
+
+- Each window represent: ball, team1 and team2 detections. 
+
+- The idea is to fine tune the thresholds parameters for each color using the trackbars and binary image as feedback. Once you have the settings you like, use those settings in `save_coords.py` 
+
+
+
+
+

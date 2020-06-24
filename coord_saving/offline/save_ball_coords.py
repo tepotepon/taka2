@@ -75,10 +75,6 @@ save_flag = False
 pause = False
 frame = 0
 
-# Orange color thresholds 
-low_red = np.array([6, 110, 200])	
-high_red = np.array([15, 250, 255])	
-
 cv2.namedWindow('ball_detection',cv2.WINDOW_NORMAL)
 
 # create trackbars for color change
@@ -100,6 +96,7 @@ while cap.isOpened():
 		img1 = last_image
 
 	hsv_frame = cv2.cvtColor(img1, cv2.COLOR_BGR2HSV)
+
 	# get current positions of four trackbars
 	h1 = cv2.getTrackbarPos('low H','ball_detection')
 	h2 = cv2.getTrackbarPos('high H','ball_detection')
