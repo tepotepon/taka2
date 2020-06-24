@@ -33,22 +33,6 @@ $ python full.py
 
 ---
 
-## Offline_tunning: 
-> this script serves as a test for tunning the color thresholds parameters.
-
-- call using terminal: 
-```shell
-$ python Offline_tunning.py example.mp4
-```
-- It will show you 3 windows, like this:
-![image](https://user-images.githubusercontent.com/32227452/85522263-6676a580-b5d3-11ea-83ae-e974821d5d66.png)}
-
->**note**: In the example, the detection is not as good as it could be because of poor choice of colors. 
-
-- Each window represent: ball, team1 and team2 detections. 
-
-- The idea is to fine tune the thresholds parameters for each color using the trackbars and binary image as feedback. Once you have the settings you like, use those settings in `save_coords.py` 
-
 
 
 
