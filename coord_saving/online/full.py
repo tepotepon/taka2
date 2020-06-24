@@ -88,8 +88,9 @@ cy = 0
 # Create a GkPos object with an array size of 5
 gkPos = gkp.GkPos(5)
 
-f = open("output/data.txt","w+")
-ball_f = open("output/ball_coords.txt","w+")
+fb = open("coords_data/ball_tracking.txt","w+")
+fteam1 = open("coords_data/team1_tracking.txt","w+")
+fteam2 = open("coords_data/team2_tracking.txt","w+")
 
 # Camera stuff
 camera = pylon.InstantCamera(pylon.TlFactory.GetInstance().CreateFirstDevice())
@@ -232,7 +233,7 @@ while camera.IsGrabbing():
 		if (save_flag == True) and (pause == False):
 			datos = str(frame) + ", " + text + ", " + str(centroid[0]) + ", " + str(centroid[1]) + ";\r\n"
 			fteam2.write(datos)
-			
+
 	# Send the motor to the required position
 	A0.controller.pos_setpoint = y_ref
 
@@ -244,7 +245,9 @@ while camera.IsGrabbing():
 
 camera.StopGrabbing()
 out.release()
-f.close()
-ball_f.close()
+fb.close()
+fteam2.close()
+fteam1.close()
+
 
 cv2.destroyAllWindows()
